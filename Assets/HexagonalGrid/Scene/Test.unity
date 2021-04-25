@@ -308,13 +308,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e274aa8d51744c4bb6a11bd6a2395b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 20
-  height: 20
+  width: 10
+  height: 10
   cellPrefab: {fileID: 9026673448075407869, guid: 4ca431ee45a84e2488bb0d28c44f7efd,
     type: 3}
   cellLabelPrefab: {fileID: 7370792180980307063, guid: 1c7cf02b093fe9b4f9f97c7ba86a6dfe,
     type: 3}
   gridCanvas: {fileID: 1268119386}
+  cubes: {fileID: 2153129318356749456, guid: 6acc1950e8225b946a6b9fe83391d2f9, type: 3}
+  gnd:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!4 &735157544
 Transform:
   m_ObjectHideFlags: 0

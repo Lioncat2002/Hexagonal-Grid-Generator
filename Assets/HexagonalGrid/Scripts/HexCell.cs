@@ -5,5 +5,5 @@ using UnityEngine;
 public class HexCell : MonoBehaviour
 {
     public HexCoordinates coordinates;
-
+    public bool isOccupied = false;
 }

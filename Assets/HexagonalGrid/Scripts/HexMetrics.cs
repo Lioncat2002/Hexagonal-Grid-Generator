@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class HexMetrics
 {
-    public const float OuterRadius = 10f;
+    public const float OuterRadius = 1.525f;
     public const float InnerRadius=OuterRadius* 0.866025404f;
 
     public static Vector3[] corners = {

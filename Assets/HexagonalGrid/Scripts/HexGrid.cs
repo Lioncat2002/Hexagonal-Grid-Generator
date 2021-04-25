@@ -12,6 +12,8 @@ public class HexGrid : MonoBehaviour
     public TextMeshProUGUI cellLabelPrefab;
     public Canvas gridCanvas;
     HexMesh hexMesh;
+    public GameObject cubes;
+    public LayerMask gnd;
     private void Awake()
     {
         cells = new HexCell[height*width];
@@ -41,9 +43,38 @@ public class HexGrid : MonoBehaviour
         cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
-        TextMeshProUGUI label = Instantiate<TextMeshProUGUI>(cellLabelPrefab);
-        label.rectTransform.SetParent(gridCanvas.transform, false);
-        label.rectTransform.anchoredPosition = new Vector2(position.x, position.z);
-        label.text =cell.coordinates.ToStringOnSeperateLines();
+        
+    }
+    private void Update()
+    {
+        if(Input.GetMouseButton(0))
+        {
+            HandleInput();
+        }
+    }
+    void HandleInput()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        
+        if (Physics.Raycast(ray,out hit, Mathf.Infinity,gnd))
+        {
+            TouchCell(hit.point);
+        }
+    }
+
+    private void TouchCell(Vector3 point)
+    {
+        point = transform.InverseTransformPoint(point);
+         HexCoordinates coordinates = HexCoordinates.FromPosition(point);
+        int index = coordinates.X + coordinates.Z * width + coordinates.Z / 2;
+        HexCell cell = cells[index];
+        Debug.Log(cell.transform.position);
+        if (!cell.isOccupied)
+        {
+            Instantiate(cubes, cell.transform.position, Quaternion.identity);
+            cell.isOccupied = true;
+        }
+        Debug.Log("Touched at:" + coordinates);
     }
 }
